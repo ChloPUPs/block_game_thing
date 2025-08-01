@@ -14,17 +14,20 @@ screen["surface"] = pg.display.set_mode([screen["proportions"]["width"], screen[
 clock = pg.Clock()
 framerate = 60
 
+def add_level(level_file_path):
+    with open(level_file_path, "r") as level_file:
+        level_dict = json.load(level_file)
+
+        for l in levels:
+            if level_dict["level_num"] == l["level_num"]:
+                raise RuntimeError()
+
+        levels.append(level_dict)
+
 levels = []
 current_level_num = 0
 
-def create_level_info(level, level_num):
-    return {
-        "level_num": level_num,
-        "level_data": json.load(level)
-    }
-
-with open("./level_data/test_level.json", "r") as level1:
-    levels.append(create_level_info(level1, 0))
+add_level("./level_data/test_level.json")
 
 is_key_down = {
     "right": False,
