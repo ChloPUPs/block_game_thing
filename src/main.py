@@ -1,5 +1,5 @@
 import pygame as pg, sys, json
-import entities, camera
+import entities, camera, level
 
 pg.init()
 
@@ -14,20 +14,7 @@ screen["surface"] = pg.display.set_mode([screen["proportions"]["width"], screen[
 clock = pg.Clock()
 framerate = 60
 
-def add_level(level_file_path):
-    with open(level_file_path, "r") as level_file:
-        level_dict = json.load(level_file)
-
-        for l in levels:
-            if level_dict["level_num"] == l["level_num"]:
-                raise RuntimeError()
-
-        levels.append(level_dict)
-
-levels = []
-current_level_num = 0
-
-add_level("./level_data/test_level.json")
+level.add_level("./level_data/test_level.json")
 
 is_key_down = {
     "right": False,
@@ -88,12 +75,14 @@ def update():
         camera.camera_y += 0.1
     if is_key_down["up"] or is_key_down["w"]:
         camera.camera_y -= 0.1
+    
+    level.update_block_rects(level.levels[level.current_level_num], camera.camera_x, camera.camera_y)
 
     clock.tick(framerate)
 
 def draw():
     screen["surface"].fill([0, 0, 0])
-    camera.draw_camera(levels[current_level_num], screen["proportions"]["width"], screen["proportions"]["height"], screen)
+    camera.draw_camera(level.levels[level.current_level_num], screen["proportions"]["width"], screen["proportions"]["height"], screen)
     pg.display.update()
 
 while True:
