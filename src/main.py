@@ -11,7 +11,7 @@ screen = {
 }
 screen["surface"] = pg.display.set_mode([screen["proportions"]["width"], screen["proportions"]["height"]])
 
-clock = pg.Clock()
+clock = pg.time.Clock()
 framerate = 60
 
 level.add_level("./level_data/test_level.json")
