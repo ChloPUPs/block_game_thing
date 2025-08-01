@@ -11,6 +11,9 @@ screen = {
 }
 screen["surface"] = pg.display.set_mode([screen["proportions"]["width"], screen["proportions"]["height"]])
 
+clock = pg.Clock()
+framerate = 60
+
 levels = []
 current_level_num = 0
 
@@ -75,13 +78,15 @@ def update():
                 is_key_down["d"] = False
     
     if is_key_down["right"] or is_key_down["d"]:
-        camera.camera_x += 0.005
+        camera.camera_x += 0.1
     if is_key_down["left"] or is_key_down["a"]:
-        camera.camera_x -= 0.005
+        camera.camera_x -= 0.1
     if is_key_down["down"] or is_key_down["s"]:
-        camera.camera_y += 0.005
+        camera.camera_y += 0.1
     if is_key_down["up"] or is_key_down["w"]:
-        camera.camera_y -= 0.005
+        camera.camera_y -= 0.1
+
+    clock.tick(framerate)
 
 def draw():
     screen["surface"].fill([0, 0, 0])
