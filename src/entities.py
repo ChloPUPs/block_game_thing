@@ -48,7 +48,7 @@ class Player:
             while self.x < b["pos"]["x"] + 1 / 100 and self.x + 4/5 > b["pos"]["x"] and self.y < b["pos"]["y"] + 1 and self.y + 4/5 > b["pos"]["y"]:
                 self.velocity_x = 0
                 self.x -= 0.01
-        
+
         if self.y > 20:
             self.x = self.start_x
             self.y = self.start_y
