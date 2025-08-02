@@ -15,6 +15,7 @@ clock = pg.time.Clock()
 framerate = 60
 
 level.add_level("./level_data/test_level.json")
+level.add_level("./level_data/level1.json")
 
 player = entities.Player(level.levels[level.current_level_num]["level_data"]["player_start"]["x"], level.levels[level.current_level_num]["level_data"]["player_start"]["y"])
 

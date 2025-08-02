@@ -9,7 +9,7 @@ def add_level(level_file_path):
                 raise RuntimeError()
 
         for b in level_dict["level_data"]["blocks"]:
-            b["block_rect"] = pg.Rect(0, 0, 50, 50)
+            b["block_rect"] = pg.Rect(0, 0, 51, 51)
 
         levels.append(level_dict)
 
@@ -19,4 +19,4 @@ def update_block_rects(level, camera_x, camera_y):
         b["block_rect"].y = (b["pos"]["y"] - camera_y) * 50
 
 levels = []
-current_level_num = 0
+current_level_num = 1
