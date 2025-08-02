@@ -13,9 +13,6 @@ class Player:
         self.velocity_y = 0
         self.velocity_x = 0
 
-        self.max_velocity_y = 40
-        self.max_velocity_x = 10
-
     def jump(self, level):
         for b in level["level_data"]["blocks"]:
             if self.x < b["pos"]["x"] + 1 and self.x + 4/5 > b["pos"]["x"] and self.y < b["pos"]["y"] + 1 / 100 and self.y + 9/10 > b["pos"]["y"]:
@@ -32,12 +29,6 @@ class Player:
             self.velocity_x = -0.06
         else:
             self.velocity_x = 0
-
-        if self.velocity_x > self.max_velocity_x:
-            self.max_velocity_x = self.max_velocity_x
-        
-        if self.velocity_x < -self.max_velocity_x:
-            self.max_velocity_x = self.max_velocity_x
         
         self.x += self.velocity_x
         self.y += self.velocity_y
