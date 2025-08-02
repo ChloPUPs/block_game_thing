@@ -1,4 +1,4 @@
-import pygame as pg, sys, json
+import pygame as pg, sys
 import entities, camera, level
 
 pg.init()
@@ -15,6 +15,8 @@ clock = pg.time.Clock()
 framerate = 60
 
 level.add_level("./level_data/test_level.json")
+
+player = entities.Player(level.levels[level.current_level_num]["level_data"]["player_start"]["x"], level.levels[level.current_level_num]["level_data"]["player_start"]["y"])
 
 is_key_down = {
     "right": False,
@@ -43,6 +45,7 @@ def update():
                 is_key_down["up"] = True
             if e.key == pg.K_w:
                 is_key_down["w"] = True
+                player.jump(level.levels[level.current_level_num])
             if e.key == pg.K_a:
                 is_key_down["a"] = True
             if e.key == pg.K_s:
@@ -67,22 +70,23 @@ def update():
             if e.key == pg.K_d:
                 is_key_down["d"] = False
     
-    if is_key_down["right"] or is_key_down["d"]:
+    if is_key_down["right"]:
         camera.camera_x += 0.1
-    if is_key_down["left"] or is_key_down["a"]:
+    if is_key_down["left"]:
         camera.camera_x -= 0.1
-    if is_key_down["down"] or is_key_down["s"]:
+    if is_key_down["down"]:
         camera.camera_y += 0.1
-    if is_key_down["up"] or is_key_down["w"]:
+    if is_key_down["up"]:
         camera.camera_y -= 0.1
     
     level.update_block_rects(level.levels[level.current_level_num], camera.camera_x, camera.camera_y)
+    player.update(camera.camera_x, camera.camera_y, level.levels[level.current_level_num], is_key_down)
 
     clock.tick(framerate)
 
 def draw():
     screen["surface"].fill([0, 0, 0])
-    camera.draw_camera(level.levels[level.current_level_num], screen["proportions"]["width"], screen["proportions"]["height"], screen)
+    camera.draw_camera(level.levels[level.current_level_num], player, screen["proportions"]["width"], screen["proportions"]["height"], screen)
     pg.display.update()
 
 while True:
