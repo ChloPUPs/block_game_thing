@@ -9,4 +9,4 @@ def draw_camera(level, player, window_width, window_height, surface):
             pg.draw.rect(surface["surface"], [255, 255, 255], b["block_rect"])
 
     if player.x > camera_x - 4/5 and player.x < window_width / 32 + camera_x + 4/5 and player.y > camera_y - 1 and player.y < window_height / 32 + camera_y + 1:
-        surface["surface"].blit(player.img, [(player.x - camera_x) * 32 - (player.rect.w / 6), (player.y - camera_y) * 32 ])
+        surface["surface"].blit(player.img, [(player.x - camera_x) * 32 - (player.rect.w / 6), (player.y - camera_y) * 32])
